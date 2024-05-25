@@ -13,8 +13,8 @@ backend default {
 #   "127.0.0.1";
 # }
 
-sub vcl_fetch {
-    set beresp.http.X-Client-Ip = client.ip;
+sub vcl_deliver {
+  set resp.http.Remote-IP = req.http.X-Forwarded-For; #Just for test
 }
 
 sub vcl_recv {
