@@ -1,5 +1,5 @@
 {
     "configuration": {
-        "opcache.preload_user": "600"
+        "realpath_cache_ttl": "600"
     }
 }
