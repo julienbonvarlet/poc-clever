@@ -23,6 +23,8 @@ api_platform:
         invalidation:
             enabled: true
             urls: ['%env(VARNISH_URL)%']
+            request_options:
+                - X-Purge-Auth: '%env(VARNISH_PURGE_SECRET)%'
             purger: 'api_platform.http_cache.purger.varnish.ban'
         public: true
     defaults:
