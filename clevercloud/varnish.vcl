@@ -13,10 +13,6 @@ sub vcl_deliver {
 }
 
 sub vcl_recv {
-  if (req.url ~ "/_profiler.*") {
-    return (pass);
-  }
-
   if (req.restarts > 0) {
     set req.hash_always_miss = true;
   }
