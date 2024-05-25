@@ -8,13 +8,13 @@ backend default {
 }
 
 # Hosts allowed to send BAN requests
-# acl invalidators {
-#   "localhost";
-#   "127.0.0.1";
-# }
-
-sub vcl_deliver {
-  set resp.http.Remote-IP = req.http.X-Forwarded-For; #Just for test
+acl invalidators {
+  "localhost";
+  "127.0.0.1";
+  "185.42.117.0/24";
+  "46.252.181.0/24";
+  "91.208.207.0/24";
+  "185.133.116.0/22";
 }
 
 sub vcl_recv {
@@ -31,9 +31,9 @@ sub vcl_recv {
 
   # To allow API Platform to ban by cache tags
   if (req.method == "BAN") {
-    # if (client.ip !~ invalidators) {
-    #   return (synth(405, "Not allowed"));
-    # }
+    if (client.ip !~ invalidators) {
+      return (synth(405, "Not allowed"));
+    }
 
     if (req.http.ApiPlatform-Ban-Regex) {
       ban("obj.http.Cache-Tags ~ " + req.http.ApiPlatform-Ban-Regex);
