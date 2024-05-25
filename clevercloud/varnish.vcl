@@ -23,6 +23,15 @@ sub vcl_recv {
   # Remove the "Forwarded" HTTP header if exists (security)
   unset req.http.forwarded;
 
+  if (
+    !req.url ~ "/api/v3/(.*)" ||
+    !req.url ~ "/api/front/reference/(.*)" ||
+    !req.url ~ "/api/front/product/search/(.*)" ||
+    !req.url ~ "/api/v2/admin/retail/brands/(.*)/articles/filters"
+  ) {
+    return (pass);
+  }
+
   # To allow API Platform to ban by cache tags
   if (req.method == "BAN") {
     if (req.http.X-Purge-Auth != "${VARNISH_PURGE_SECRET}") {
