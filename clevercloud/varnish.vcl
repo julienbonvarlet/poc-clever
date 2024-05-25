@@ -27,9 +27,9 @@ sub vcl_recv {
 
   # To allow API Platform to ban by cache tags
   if (req.method == "BAN") {
-    if (client.ip !~ invalidators) {
-      return (synth(405, "Not allowed"));
-    }
+    # if (client.ip !~ invalidators) {
+    #   return (synth(405, "Not allowed"));
+    # }
 
     if (req.http.ApiPlatform-Ban-Regex) {
       ban("obj.http.Cache-Tags ~ " + req.http.ApiPlatform-Ban-Regex);
