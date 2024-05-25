@@ -2,6 +2,19 @@ vcl 4.0;
 
 import std;
 
+backend default {
+  .host = "127.0.0.1";
+  .port = "8081";
+  # Health check
+  .probe = {
+    .url = "/";
+    .timeout = 5s;
+    .interval = 10s;
+    .window = 5;
+    .threshold = 3;
+  }
+}
+
 # Hosts allowed to send BAN requests
 acl invalidators {
   "localhost";
