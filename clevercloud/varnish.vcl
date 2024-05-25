@@ -8,10 +8,10 @@ backend default {
 }
 
 # Hosts allowed to send BAN requests
-acl invalidators {
-  "localhost";
-  "127.0.0.1";
-}
+# acl invalidators {
+#   "localhost";
+#   "127.0.0.1";
+# }
 
 sub vcl_recv {
   if (req.url ~ "/_profiler") {
