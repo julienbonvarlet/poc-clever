@@ -80,8 +80,11 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "7.0.*",
-            "docker": true
+            "require": "7.0.*"
         }
+    },
+    "require-dev": {
+        "symfony/stopwatch": "7.0.*",
+        "symfony/web-profiler-bundle": "7.0.*"
     }
 }
