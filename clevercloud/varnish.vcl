@@ -10,6 +10,7 @@ backend default {
 sub vcl_deliver {
   set resp.http.Remote-IP = req.http.X-Forwarded-For; #Just for test
   set resp.http.Client-IP = client.ip; #Just for test
+  set resp.http.Purge-Secret = std.getenv("VARNISH_PURGE_SECRET"); #Just for test
 }
 
 sub vcl_recv {
