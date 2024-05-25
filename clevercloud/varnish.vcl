@@ -17,6 +17,10 @@ acl invalidators {
   "185.133.116.0/22";
 }
 
+sub vcl_deliver {
+  set resp.http.Remote-IP = req.http.X-Forwarded-For; #Just for test
+}
+
 sub vcl_recv {
   if (req.url ~ "/_profiler") {
     return (pass);
