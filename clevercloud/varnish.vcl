@@ -1,7 +1,6 @@
 vcl 4.0;
 
 import std;
-import xkey;
 
 # Hosts allowed to send BAN requests
 acl invalidators {
@@ -48,18 +47,11 @@ sub vcl_recv {
     return (synth(400, "ApiPlatform-Ban-Regex HTTP header must be set."));
   }
 
-  # Allow purging (needs xkey mod)
   if (req.method == "PURGE") {
     # purge is the ACL defined at the beginning
     if (!client.ip ~ invalidators) {
       # Not from an allowed IP? Then die with an error.
       return (synth(403, "This IP is not allowed to send PURGE requests."));
-    }
-
-    if (req.http.xkey) {
-      set req.http.n-gone = xkey.purge(req.http.xkey);
-      # or: set req.http.n-gone = xkey.softpurge(req.http.xkey)
-      return (synth(200, "Invalidated "+req.http.n-gone+" objects"));
     }
 
     # If you got this stage (and didn't error out above), purge the cached result
@@ -253,12 +245,10 @@ sub vcl_deliver {
 
   # Remove some headers: Apache version & OS
   unset resp.http.Server;
-  # unset resp.http.X-Drupal-Cache;
   unset resp.http.X-Varnish;
   unset resp.http.Via;
   # unset resp.http.Link;
   # unset resp.http.X-Generator;
-  unset resp.http.xkey;
 
   call cors;
   return (deliver);
