@@ -23,6 +23,7 @@ api_platform:
         invalidation:
             enabled: true
             varnish_urls: ['%env(VARNISH_URL)%']
+            purger: 'api_platform.http_cache.purger.varnish.ban'
         public: true
     defaults:
         stateless: true
