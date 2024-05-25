@@ -29,7 +29,7 @@ sub vcl_recv {
 
   # To allow API Platform to ban by cache tags
   if (req.method == "BAN") {
-    if (req.http.X-Purge-Auth != std.getenv("VARNISH_PURGE_SECRET")) {
+    if (req.http.X-Purge-Auth != "${VARNISH_PURGE_SECRET}") {
         return (synth(405, "Not allowed"));
     }
 
