@@ -45,6 +45,15 @@ sub vcl_recv {
 }
 
 sub vcl_hit {
+  if (
+    !req.url ~ "/api/v3/(.*)" ||
+    !req.url ~ "/api/front/reference/(.*)" ||
+    !req.url ~ "/api/front/product/search/(.*)" ||
+    !req.url ~ "/api/v2/admin/retail/brands/(.*)/articles/filters"
+  ) {
+    return (pass);
+  }
+
   if (obj.ttl >= 0s) {
     # A pure unadulterated hit, deliver it
     return (deliver);
