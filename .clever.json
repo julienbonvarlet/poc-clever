@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "app_id": "app_bb4d5144-d0b6-4340-8555-0bce0141dfb5",
+      "org_id": "orga_f48df293-5e3e-4c88-bb9f-2090ffafcb0d",
+      "deploy_url": "https://push-n3-par-clevercloud-customers.services.clever-cloud.com/app_bb4d5144-d0b6-4340-8555-0bce0141dfb5.git",
+      "git_ssh_url": "git+ssh://git@push-n3-par-clevercloud-customers.services.clever-cloud.com/app_bb4d5144-d0b6-4340-8555-0bce0141dfb5.git",
+      "name": "poc-julien",
+      "alias": "poc-julien"
+    }
+  ]
+}
