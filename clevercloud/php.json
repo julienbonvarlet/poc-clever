@@ -1,0 +1,5 @@
+{
+    "configuration": {
+        "opcache.preload_user": "600"
+    }
+}
