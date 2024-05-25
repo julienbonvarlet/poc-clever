@@ -19,9 +19,16 @@ api_platform:
         jsonld: ['application/ld+json']
         jsonopenapi: ['application/vnd.openapi+json']
         html: ['text/html']
+    http_cache:
+        invalidation:
+            enabled: true
+            varnish_urls: ['%env(VARNISH_URL)%']
+        public: true
     defaults:
         stateless: true
         cache_headers:
+            max_age: 0
+            shared_max_age: 3600
             vary: ['Content-Type', 'Authorization', 'Origin']
         extra_properties:
             standard_put: true
