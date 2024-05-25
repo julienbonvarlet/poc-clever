@@ -13,6 +13,10 @@ backend default {
 #   "127.0.0.1";
 # }
 
+sub vcl_fetch {
+    set beresp.http.X-Client-Ip = client.ip;
+}
+
 sub vcl_recv {
   if (req.url ~ "/_profiler") {
     return (pass);
