@@ -13,7 +13,7 @@ sub vcl_deliver {
 }
 
 sub vcl_recv {
-  if (req.url ~ "/_profiler") {
+  if (req.url ~ "/_profiler.*") {
     return (pass);
   }
 
