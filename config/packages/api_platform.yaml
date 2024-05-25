@@ -25,7 +25,7 @@ api_platform:
             urls: ['%env(VARNISH_URL)%']
             request_options:
                 headers:
-                    - X-Purge-Auth: '%env(VARNISH_PURGE_SECRET)%'
+                    X-Purge-Auth: '%env(VARNISH_PURGE_SECRET)%'
             purger: 'api_platform.http_cache.purger.varnish.ban'
         public: true
     defaults:
