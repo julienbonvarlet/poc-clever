@@ -16,6 +16,10 @@ sub vcl_deliver {
 }
 
 sub vcl_recv {
+  if (req.method == "GET" && (req.url !~ "/api/v3/(.*)|/api/front/reference/(.*)|/api/front/product/search/(.*)|/api/v2/admin/retail/brands/(.*)/articles/filters")) {
+      return (pass);
+  }
+
   if (req.restarts > 0) {
     set req.hash_always_miss = true;
   }
